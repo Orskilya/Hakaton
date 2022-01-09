@@ -1,9 +1,10 @@
 import pygame
+
 fps = 60
 
 
 class Hero(pygame.sprite.Sprite):
-    def __init__(self, sheet, coord, columns, rows, collision_objects, chests, door, level, *group):
+    def __init__(self, sheet, coord, columns, rows, collision_objects, chests, door, level, oleg, *group):
         super().__init__(*group)
         self.coord = coord  # list
         self.keys = []
@@ -26,6 +27,7 @@ class Hero(pygame.sprite.Sprite):
         self.collision_chests = chests
         self.door = door
         self.level = level
+        self.oleg = oleg
 
     def fly(self, key=None, par=None):
         if par == 'go':
@@ -56,6 +58,9 @@ class Hero(pygame.sprite.Sprite):
                 chest.opened = True
                 if chest.key == 1:
                     self.key = True
+        if pygame.sprite.collide_mask(self, self.oleg):
+            pass
+
         if pygame.sprite.collide_mask(self, self.door):
             if self.key and self.level.n != 2:
                 self.key = False
@@ -106,5 +111,3 @@ class Hero(pygame.sprite.Sprite):
                     frame_location, self.rect.size)))
             self.frames.append(local_frames.copy())
             local_frames.clear()
-
-

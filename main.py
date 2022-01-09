@@ -6,6 +6,7 @@ import Background
 import sys
 import Chest
 import Door
+import Maze_Friend
 
 
 def load_image(name, size_of_sprite=None, color_key=None):
@@ -209,6 +210,7 @@ all_sprites = pygame.sprite.Group()
 collision = pygame.sprite.Group()
 chests = pygame.sprite.Group()
 door_sg = pygame.sprite.Group()
+friend = pygame.sprite.Group()
 chests_list = []
 bg.append(Background.Bg(load_image('Background.png'), (0, 0), all_sprites))
 bg.append(Background.Bg(load_image('Background.png'), (677, 0), all_sprites))
@@ -229,11 +231,12 @@ chests_list.append(
     Chest.Chest([load_image('Chest.png', (80, 65)), load_image('Chest_open.png', (50, 40))],
                 [200, 380], 0, all_sprites, chests))
 door = Door.Door(load_image('door.png', (64, 45)), [950, 600], all_sprites, door_sg)
+oleg = Maze_Friend.Oleg(load_image('Oleg.png', (180, 120), -1), [319, 120], friend, all_sprites)
 lvl = Level.Level(
     [load_image('lab2.png', (1280, 720), -1), load_image('lab1.png', (1280, 720)),
      load_image('lab3.png', (1280, 720), -1)],
-    chests_list, door, all_sprites, collision)
-hero = Hero.Hero(load_image('Hero_sheet.png'), [85, 85], 10, 8, collision, chests, door, lvl,
+    chests_list, door, oleg, all_sprites, collision)
+hero = Hero.Hero(load_image('Hero_sheet.png'), [85, 85], 10, 8, collision, chests, door, lvl, oleg,
                  all_sprites)
 lvl.next_level()
 

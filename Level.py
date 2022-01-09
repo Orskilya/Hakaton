@@ -2,9 +2,10 @@ import pygame
 
 
 class Level(pygame.sprite.Sprite):
-    def __init__(self, images, chests, door, *group):
+    def __init__(self, images, chests, door, oleg, *group):
         super().__init__(*group)
-        self.n = -1
+        self.n = 0
+        self.oleg = oleg
         self.images = images
         self.image = images[self.n]
         self.rect = self.image.get_rect()
@@ -43,6 +44,8 @@ class Level(pygame.sprite.Sprite):
             self.chests[3].rect.y = 395
             self.door.rect.x = 950
             self.door.rect.y = 600
+            self.oleg.rect.x = 800
+            self.oleg.rect.y = 180
         elif self.n == 2:
             self.chests[0].rect.x = 380
             self.chests[0].rect.y = 250

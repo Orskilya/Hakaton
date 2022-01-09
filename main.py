@@ -24,12 +24,12 @@ def load_image(name, size_of_sprite=None, color_key=None):
 
 
 def shadow():
-    pygame.draw.rect(screen, pygame.Color('black'), pygame.Rect((0, 0), (hero.rect.x - 75, 720)))
-    pygame.draw.rect(screen, pygame.Color('black'), pygame.Rect((0, 0), (1280, hero.rect.y - 75)))
+    pygame.draw.rect(screen, pygame.Color('black'), pygame.Rect((0, 0), (hero.rect.x - 50, 720)))
+    pygame.draw.rect(screen, pygame.Color('black'), pygame.Rect((0, 0), (1280, hero.rect.y - 50)))
     pygame.draw.rect(screen, pygame.Color('black'),
-                     pygame.Rect((hero.rect.x + hero.rect.w + 25, 0), (1280, 720)))
+                     pygame.Rect((hero.rect.x + hero.rect.w + 50, 0), (1280, 720)))
     pygame.draw.rect(screen, pygame.Color('black'),
-                     pygame.Rect((0, hero.rect.y + hero.rect.h + 75), (1280, 720)))
+                     pygame.Rect((0, hero.rect.y + hero.rect.h + 50), (1280, 720)))
 
 
 def end():
@@ -243,7 +243,7 @@ while running:
     screen.fill(pygame.Color('white'))
     all_sprites.update()
     all_sprites.draw(screen)
-    # shadow()
+    shadow()
     if hero.key:
         screen.blit(text, (30, 30))
     if lvl.n == 3:

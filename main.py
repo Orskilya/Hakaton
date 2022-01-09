@@ -183,7 +183,7 @@ bg.append(Background.Bg(load_image('Background.png'), (677, 320), all_sprites))
 bg.append(Background.Bg(load_image('Background.png'), (0, 640), all_sprites))
 bg.append(Background.Bg(load_image('Background.png'), (677, 640), all_sprites))
 lvl = Level.Level(
-    [load_image('lab1.png', (1280, 720), -1), load_image('lab2.png', (1280, 720), -1), load_image('lab2.png', (1280, 720), -1)],
+    [load_image('lab1.png', (1280, 720)), load_image('lab2.png', (1280, 720), -1), load_image('lab2.png', (1280, 720), -1)],
     chests_list, all_sprites, collision)
 hero = Hero.Hero(load_image('Hero_sheet.png'), [40, 40], 10, 8, collision, chests, all_sprites)
 chests_list.append(Chest.Chest(load_image('Chest.png', (51, 48)), [530, 430], 1, all_sprites, chests))

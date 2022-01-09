@@ -17,7 +17,7 @@ class Hero(pygame.sprite.Sprite):
         self.count = 0
         self.images_speed = 10
         self.speed = 150
-        self.size = (self.rect.w * 0.4, self.rect.h * 0.4)
+        self.size = (self.rect.w * 0.6, self.rect.h * 0.6)
         self.image = pygame.transform.scale(self.image, (self.size[0], self.size[1]))
         self.mask = pygame.mask.from_surface(self.image)
         self.collision_objects = collision_objects
@@ -94,12 +94,12 @@ class Hero(pygame.sprite.Sprite):
         self.count = (self.count + 1) % self.images_speed
 
     def cut_sheet(self, sheet, columns, rows):
-        self.rect = pygame.Rect(0, 0, (sheet.get_width() - 10) // columns,
-                                (sheet.get_height() - 10) // rows)
+        self.rect = pygame.Rect(0, 0, (sheet.get_width() // columns),
+                                (sheet.get_height() - 20) // rows)
         for j in range(rows):
             local_frames = []
             for i in range(columns):
-                frame_location = (self.rect.w * i + 10, self.rect.h * j + 10)
+                frame_location = (self.rect.w * i, self.rect.h * j + 20)
                 local_frames.append(sheet.subsurface(pygame.Rect(
                     frame_location, self.rect.size)))
             self.frames.append(local_frames.copy())

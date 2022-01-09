@@ -49,9 +49,11 @@ class Hero(pygame.sprite.Sprite):
             if pygame.sprite.collide_mask(sprite, self):
                 self.coord[self.move[1]] += self.move[0]
         for chest in self.collision_chests:
-            if self.key:
-                break
-            if pygame.sprite.collide_mask(chest, self):
+            if pygame.sprite.collide_mask(chest, self) and not chest.opened:
+                chest.image = chest.images[1]
+                chest.rect.x += 10
+                chest.rect.y += 10
+                chest.opened = True
                 if chest.key == 1:
                     self.key = True
         if pygame.sprite.collide_mask(self, self.door):

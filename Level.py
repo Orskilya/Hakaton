@@ -18,6 +18,9 @@ class Level(pygame.sprite.Sprite):
         self.n += 1
         self.image = self.images[self.n]
         self.mask = pygame.mask.from_surface(self.image)
+        for elem in self.chests:
+            elem.image = elem.images[0]
+            elem.opened = False
         if self.n == 0:
             self.chests[0].rect.x = 45
             self.chests[0].rect.y = 230

@@ -216,13 +216,10 @@ bg.append(Background.Bg(load_image('Background.png'), (0, 320), all_sprites))
 bg.append(Background.Bg(load_image('Background.png'), (677, 320), all_sprites))
 bg.append(Background.Bg(load_image('Background.png'), (0, 640), all_sprites))
 bg.append(Background.Bg(load_image('Background.png'), (677, 640), all_sprites))
-chests_list.append(
-    Chest.Chest(load_image('Chest.png', (80, 65)), [530, 430], 0, all_sprites, chests))
-chests_list.append(
-    Chest.Chest(load_image('Chest.png', (80, 65)), [850, 410], 0, all_sprites, chests))
-chests_list.append(Chest.Chest(load_image('Chest.png', (80, 65)), [930, 50], 1, all_sprites, chests))
-chests_list.append(
-    Chest.Chest(load_image('Chest.png', (80, 65)), [200, 380], 0, all_sprites, chests))
+chests_list.append(Chest.Chest([load_image('Chest.png', (80, 65)), load_image('Chest_open.png', (50, 40))], [530, 430], 0, all_sprites, chests))
+chests_list.append(Chest.Chest([load_image('Chest.png', (80, 65)), load_image('Chest_open.png', (50, 40))], [850, 410], 0, all_sprites, chests))
+chests_list.append(Chest.Chest([load_image('Chest.png', (80, 65)), load_image('Chest_open.png', (50, 40))], [930, 50], 1, all_sprites, chests))
+chests_list.append(Chest.Chest([load_image('Chest.png', (80, 65)), load_image('Chest_open.png', (50, 40))], [200, 380], 0, all_sprites, chests))
 door = Door.Door(load_image('door.png', (64, 45)), [950, 600], all_sprites, door_sg)
 lvl = Level.Level(
     [load_image('lab2.png', (1280, 720), -1), load_image('lab1.png', (1280, 720)),

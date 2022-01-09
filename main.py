@@ -46,18 +46,18 @@ class Lobby:
                     quit()
                 elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # button push
                     pos = event.pos
-                    if 40 <= pos[0] <= 330:
-                        if HEIGHT * 0.35 <= pos[1] <= HEIGHT * 0.35 + 55:
+                    if 40 <= pos[0] <= 450:
+                        if 250 <= pos[1] <= 320:
                             self.ent_update()
                             return
-                        elif HEIGHT * 0.35 + 55 + 20 <= pos[1] <= HEIGHT * 0.35 + 2 * 55 + 2 * 20:
+                        elif 370 <= pos[1] <= 440:
                             quit()
                 elif event.type == pygame.MOUSEMOTION:
                     pos = event.pos
-                    if 40 <= pos[0] <= 330:
-                        if HEIGHT * 0.35 <= pos[1] <= HEIGHT * 0.35 + 55:
+                    if 40 <= pos[0] <= 450:
+                        if 250 <= pos[1] <= 320:
                             self.current_button = 1
-                        elif HEIGHT * 0.35 + 55 + 20 <= pos[1] <= HEIGHT * 0.35 + 2 * 55 + 2 * 20:
+                        elif 370 <= pos[1] <= 440:
                             self.current_button = 2
                         else:
                             self.current_button = None
@@ -76,7 +76,7 @@ class Lobby:
         with open(f'data/buttons.txt', 'r', encoding='utf-8') as f:
             self.buttons = map(lambda x: x.rstrip(), f.readlines())
 
-        self.text_coord = HEIGHT * 0.35
+        self.text_coord = 225
         button = 1
         for line in self.buttons:
             if current_button == button:
@@ -85,7 +85,7 @@ class Lobby:
             else:
                 string_rendered = font.render(line, True, pygame.Color('#980002'))
             self.buttons = string_rendered.get_rect()
-            self.text_coord += 20
+            self.text_coord += 10
             self.buttons.top = self.text_coord
             self.buttons.x = 40
             self.text_coord += self.buttons.height
@@ -100,20 +100,20 @@ class Lobby:
         with open('data/disclaimer.txt', 'r', encoding='utf-8') as f:
             text = map(lambda x: x.rstrip(), f.readlines())
 
-        screen.blit(font1.render('Дисклеймер', True, pygame.Color('#980002')), (WIDTH * 0.4, HEIGHT * 0.2))
+        screen.blit(font1.render('Дисклеймер', True, pygame.Color('#980002')), (450, 100))
 
-        self.text_coord = HEIGHT * 0.3
+        self.text_coord = 200
         for line in text:
             string_rendered = font.render(line, True, pygame.Color('#980002'))
             text = string_rendered.get_rect()
             self.text_coord += 10
             text.top = self.text_coord
-            text.x = WIDTH * 0.2
+            text.x = 125
             self.text_coord += text.height
             screen.blit(string_rendered, text)
 
-        screen.blit(font.render('Нажмите "Пробел", чтобы продолжить', True, pygame.Color('#980002')),
-                    (WIDTH * 0.3, HEIGHT * 0.6))
+        screen.blit(font.render('Нажмите "Пробел", чтобы продолжить.', True, pygame.Color('#980002')),
+                    (300, 600))
 
         while True:
             for event in pygame.event.get():
@@ -125,7 +125,7 @@ class Lobby:
             clock.tick(FPS)
 
     def ent_update(self):
-        font = pygame.font.SysFont('Arialms', 40)
+        font = pygame.font.SysFont('Arialms', 30)
         screen.fill((0, 0, 0))
         photo = load_image('strange.png')
         screen.blit(photo, (30, HEIGHT * 0.1))

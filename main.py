@@ -29,6 +29,28 @@ def shadow():
     pygame.draw.rect(screen, pygame.Color('black'), pygame.Rect((0, hero.rect.y + hero.rect.h + 75), (1280, 720)))
 
 
+def end():
+    bg = load_image('end.png', SIZE)
+    screen.blit(bg, (0, 0))
+    font = pygame.font.SysFont('Arialms', 30, italic=True)
+    font1 = pygame.font.SysFont('Arialms', 70)
+
+    screen.blit(font1.render('Поздравляем!', True, pygame.Color('white')), (400, 10))
+
+    with open('data/end.txt', 'r', encoding='utf-8') as f:
+        text = map(lambda x: x.rstrip(), f.readlines())
+
+    text_coord = 600
+    for line in text:
+        string_rendered = font.render(line, True, pygame.Color('white'))
+        text = string_rendered.get_rect()
+        text_coord += 10
+        text.top = text_coord
+        text.x = 80
+        text_coord += text.height
+        screen.blit(string_rendered, text)
+
+
 class Lobby:
     global HEIGHT, SIZE, FPS
 
@@ -94,7 +116,7 @@ class Lobby:
 
     def disclaimer_update(self):
         screen.fill((0, 0, 0))
-        font = pygame.font.SysFont('Arialms', 40)
+        font = pygame.font.SysFont('Arialms', 40, italic=True)
         font1 = pygame.font.SysFont('Arialms', 60)
 
         with open('data/disclaimer.txt', 'r', encoding='utf-8') as f:
@@ -125,7 +147,7 @@ class Lobby:
             clock.tick(FPS)
 
     def ent_update(self):
-        font = pygame.font.SysFont('Arialms', 30)
+        font = pygame.font.SysFont('Arialms', 30, italic=True)
         screen.fill((0, 0, 0))
         photo = load_image('strange.png')
         screen.blit(photo, (30, HEIGHT * 0.1))
@@ -205,6 +227,7 @@ while running:
     # shadow()
     if hero.key:
         screen.blit(text, (30, 30))
+    end()
     pygame.display.flip()
     clock.tick(FPS)
 pygame.quit()

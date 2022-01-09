@@ -17,7 +17,7 @@ class Hero(pygame.sprite.Sprite):
         self.count = 0
         self.images_speed = 10
         self.speed = 150
-        self.size = (self.rect.w * 0.5, self.rect.h * 0.5)
+        self.size = (self.rect.w * 0.4, self.rect.h * 0.4)
         self.image = pygame.transform.scale(self.image, (self.size[0], self.size[1]))
         self.mask = pygame.mask.from_surface(self.image)
         self.collision_objects = collision_objects

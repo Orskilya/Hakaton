@@ -3,7 +3,7 @@ fps = 60
 
 
 class Hero(pygame.sprite.Sprite):
-    def __init__(self, sheet, coord, columns, rows, collision_objects, chests, *group):
+    def __init__(self, sheet, coord, columns, rows, collision_objects, chests, door, level, *group):
         super().__init__(*group)
         self.coord = coord  # list
         self.keys = []
@@ -24,6 +24,8 @@ class Hero(pygame.sprite.Sprite):
         self.move = (0, 0)
         self.key = False
         self.collision_chests = chests
+        self.door = door
+        self.level = level
 
     def fly(self, key=None, par=None):
         if par == 'go':
@@ -52,6 +54,14 @@ class Hero(pygame.sprite.Sprite):
             if pygame.sprite.collide_mask(chest, self):
                 if chest.key == 1:
                     self.key = True
+        if pygame.sprite.collide_mask(self, self.door):
+            if self.key:
+                self.key = False
+                self.level.next_level()
+                if self.level.n == 1:
+                    self.coord = [60, 60]
+                elif self.level.n == 2:
+                    self.coord = [60, 80]
         self.move = (0, 0)
         self.rect.center = self.coord
         self.update_frame()

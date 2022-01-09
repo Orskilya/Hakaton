@@ -192,7 +192,7 @@ door = Door.Door(load_image('door.png', (64, 45)), [950, 600], all_sprites, door
 lvl = Level.Level(
     [load_image('lab2.png', (1280, 720), -1), load_image('lab1.png', (1280, 720)), load_image('lab3.png', (1280, 720), -1)],
     chests_list, door, all_sprites, collision)
-hero = Hero.Hero(load_image('Hero_sheet.png'), [65, 65], 10, 8, collision, chests, door, lvl, all_sprites)
+hero = Hero.Hero(load_image('Hero_sheet.png'), [85, 85], 10, 8, collision, chests, door, lvl, all_sprites)
 lvl.next_level()
 
 while running:

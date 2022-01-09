@@ -26,8 +26,10 @@ def load_image(name, size_of_sprite=None, color_key=None):
 def shadow():
     pygame.draw.rect(screen, pygame.Color('black'), pygame.Rect((0, 0), (hero.rect.x - 75, 720)))
     pygame.draw.rect(screen, pygame.Color('black'), pygame.Rect((0, 0), (1280, hero.rect.y - 75)))
-    pygame.draw.rect(screen, pygame.Color('black'), pygame.Rect((hero.rect.x + hero.rect.w + 25, 0), (1280, 720)))
-    pygame.draw.rect(screen, pygame.Color('black'), pygame.Rect((0, hero.rect.y + hero.rect.h + 75), (1280, 720)))
+    pygame.draw.rect(screen, pygame.Color('black'),
+                     pygame.Rect((hero.rect.x + hero.rect.w + 25, 0), (1280, 720)))
+    pygame.draw.rect(screen, pygame.Color('black'),
+                     pygame.Rect((0, hero.rect.y + hero.rect.h + 75), (1280, 720)))
 
 
 def end():
@@ -50,6 +52,13 @@ def end():
         text.x = 80
         text_coord += text.height
         screen.blit(string_rendered, text)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+        pygame.display.flip()
+        clock.tick(FPS)
 
 
 class Lobby:
@@ -135,8 +144,9 @@ class Lobby:
             self.text_coord += text.height
             screen.blit(string_rendered, text)
 
-        screen.blit(font.render('Нажмите "Пробел", чтобы продолжить.', True, pygame.Color('#980002')),
-                    (300, 600))
+        screen.blit(
+            font.render('Нажмите "Пробел", чтобы продолжить.', True, pygame.Color('#980002')),
+            (300, 600))
 
         while True:
             for event in pygame.event.get():
@@ -206,15 +216,20 @@ bg.append(Background.Bg(load_image('Background.png'), (0, 320), all_sprites))
 bg.append(Background.Bg(load_image('Background.png'), (677, 320), all_sprites))
 bg.append(Background.Bg(load_image('Background.png'), (0, 640), all_sprites))
 bg.append(Background.Bg(load_image('Background.png'), (677, 640), all_sprites))
-chests_list.append(Chest.Chest(load_image('Chest.png', (80, 65)), [530, 430], 0, all_sprites, chests))
-chests_list.append(Chest.Chest(load_image('Chest.png', (80, 65)), [850, 410], 0, all_sprites, chests))
+chests_list.append(
+    Chest.Chest(load_image('Chest.png', (80, 65)), [530, 430], 0, all_sprites, chests))
+chests_list.append(
+    Chest.Chest(load_image('Chest.png', (80, 65)), [850, 410], 0, all_sprites, chests))
 chests_list.append(Chest.Chest(load_image('Chest.png', (80, 65)), [930, 50], 1, all_sprites, chests))
-chests_list.append(Chest.Chest(load_image('Chest.png', (80, 65)), [200, 380], 0, all_sprites, chests))
+chests_list.append(
+    Chest.Chest(load_image('Chest.png', (80, 65)), [200, 380], 0, all_sprites, chests))
 door = Door.Door(load_image('door.png', (64, 45)), [950, 600], all_sprites, door_sg)
 lvl = Level.Level(
-    [load_image('lab2.png', (1280, 720), -1), load_image('lab1.png', (1280, 720)), load_image('lab3.png', (1280, 720), -1)],
+    [load_image('lab2.png', (1280, 720), -1), load_image('lab1.png', (1280, 720)),
+     load_image('lab3.png', (1280, 720), -1)],
     chests_list, door, all_sprites, collision)
-hero = Hero.Hero(load_image('Hero_sheet.png'), [65, 65], 10, 8, collision, chests, door, lvl, all_sprites)
+hero = Hero.Hero(load_image('Hero_sheet.png'), [65, 65], 10, 8, collision, chests, door, lvl,
+                 all_sprites)
 lvl.next_level()
 
 while running:
@@ -231,7 +246,8 @@ while running:
     # shadow()
     if hero.key:
         screen.blit(text, (30, 30))
-    end()
+    if lvl.n == 3:
+        end()
     pygame.display.flip()
     clock.tick(FPS)
 pygame.quit()

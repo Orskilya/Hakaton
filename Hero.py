@@ -55,13 +55,15 @@ class Hero(pygame.sprite.Sprite):
                 if chest.key == 1:
                     self.key = True
         if pygame.sprite.collide_mask(self, self.door):
-            if self.key:
+            if self.key and self.level.n != 2:
                 self.key = False
                 self.level.next_level()
                 if self.level.n == 1:
                     self.coord = [60, 60]
                 elif self.level.n == 2:
                     self.coord = [60, 80]
+            elif self.key and self.level.n == 2:
+                self.level.n = 3
         self.move = (0, 0)
         self.rect.center = self.coord
         self.update_frame()

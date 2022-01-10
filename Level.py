@@ -4,7 +4,7 @@ import pygame
 class Level(pygame.sprite.Sprite):
     def __init__(self, images, chests, door, oleg, *group):
         super().__init__(*group)
-        self.n = 0
+        self.n = -1
         self.oleg = oleg
         self.images = images
         self.image = images[self.n]

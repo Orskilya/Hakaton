@@ -17,7 +17,7 @@ class Hero(pygame.sprite.Sprite):
         self.rect.center = self.coord
         self.count = 0
         self.images_speed = 10
-        self.speed = 150
+        self.speed = 100
         self.size = (self.rect.w * 0.6, self.rect.h * 0.6)
         self.image = pygame.transform.scale(self.image, (self.size[0], self.size[1]))
         self.mask = pygame.mask.from_surface(self.image)

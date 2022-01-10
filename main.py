@@ -284,7 +284,6 @@ hero = Hero.Hero(load_image('Hero_sheet.png'), [85, 85], 10, 8, collision, chest
 lvl.next_level()
 
 while running:
-    print(hero.dialog, oleg)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -295,11 +294,13 @@ while running:
     screen.fill(pygame.Color('white'))
     all_sprites.update()
     all_sprites.draw(screen)
-    # shadow()
+    shadow()
     if hero.dialog:
-        oleg.kill()
-        oleg = None
-        hero.dialog = oleg_connection()
+        oleg.rect.x = 3000
+        oleg.rect.y = 3000
+        hero.keys.clear()
+        oleg_connection()
+        hero.dialog = False
         hero.key = True
     if hero.key:
         screen.blit(text, (30, 30))

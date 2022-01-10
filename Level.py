@@ -23,6 +23,8 @@ class Level(pygame.sprite.Sprite):
             elem.image = elem.images[0]
             elem.opened = False
         if self.n == 0:
+            self.oleg.rect.x = 3000
+            self.oleg.rect.y = 3000
             self.chests[0].rect.x = 45
             self.chests[0].rect.y = 230
             self.chests[1].rect.x = 80
@@ -47,6 +49,9 @@ class Level(pygame.sprite.Sprite):
             self.oleg.rect.x = 800
             self.oleg.rect.y = 180
         elif self.n == 2:
+            if self.oleg:
+                self.oleg.rect.x = 3000
+                self.oleg.rect.y = 3000
             self.chests[0].rect.x = 380
             self.chests[0].rect.y = 250
             self.chests[1].rect.x = 15

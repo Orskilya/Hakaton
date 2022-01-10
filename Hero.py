@@ -28,6 +28,7 @@ class Hero(pygame.sprite.Sprite):
         self.door = door
         self.level = level
         self.oleg = oleg
+        self.dialog = False
 
     def fly(self, key=None, par=None):
         if par == 'go':
@@ -59,7 +60,7 @@ class Hero(pygame.sprite.Sprite):
                 if chest.key == 1:
                     self.key = True
         if pygame.sprite.collide_mask(self, self.oleg):
-            pass
+            self.dialog = True
 
         if pygame.sprite.collide_mask(self, self.door):
             if self.key and self.level.n != 2:

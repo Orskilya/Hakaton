@@ -62,6 +62,49 @@ def end():
         clock.tick(FPS)
 
 
+def oleg_connection():
+    screen.fill((0, 0, 0))
+
+    font = pygame.font.SysFont('Arialms', 23, italic=True)
+    with open('data/dialog.txt', 'r', encoding='utf-8') as f:
+        text = map(lambda x: x.rstrip(), f.readlines())
+
+    with open('data/game_over.txt', 'r', encoding='utf-8') as f:
+        text2 = map(lambda x: x.rstrip(), f.readlines())
+
+    text_coord = 100
+    for line in text:
+        string_rendered = font.render(line, True, pygame.Color('white'))
+        text = string_rendered.get_rect()
+        text_coord += 10
+        text.top = text_coord
+        text.x = 30
+        text_coord += text.height
+        screen.blit(string_rendered, text)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_1:
+                return False
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_2 or event.type == pygame.KEYDOWN and event.key == pygame.K_3:
+                screen.blit(load_image('game_over.png', SIZE), (0, 0))
+                font = pygame.font.SysFont('Arialms', 50)
+                text_coord = 300
+                for line in text2:
+                    string_rendered = font.render(line, True, pygame.Color('#fe0002'))
+                    text2 = string_rendered.get_rect()
+                    text_coord += 10
+                    text2.top = text_coord
+                    text2.x = 100
+                    text_coord += text2.height
+                    screen.blit(string_rendered, text2)
+
+        pygame.display.flip()
+        clock.tick(FPS)
+
+
 class Lobby:
     global HEIGHT, SIZE, FPS
 
@@ -241,6 +284,7 @@ hero = Hero.Hero(load_image('Hero_sheet.png'), [85, 85], 10, 8, collision, chest
 lvl.next_level()
 
 while running:
+    print(hero.dialog, oleg)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -251,7 +295,12 @@ while running:
     screen.fill(pygame.Color('white'))
     all_sprites.update()
     all_sprites.draw(screen)
-    shadow()
+    # shadow()
+    if hero.dialog:
+        oleg.kill()
+        oleg = None
+        hero.dialog = oleg_connection()
+        hero.key = True
     if hero.key:
         screen.blit(text, (30, 30))
     if lvl.n == 3:
